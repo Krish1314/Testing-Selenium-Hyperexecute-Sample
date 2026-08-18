@@ -78,7 +78,7 @@ cacheDirectories:
   - .m2
 
 pre:
-  - echo "ENVIRONMENT variable value is $ENVIRONMENT"
+  - echo "ENVIRONMENT variable value is $env:ENVIRONMENT"
   - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 testDiscovery:
@@ -119,7 +119,7 @@ The value is echoed during pre-steps (before tests run):
 
 ```yaml
 pre:
-  - echo "ENVIRONMENT variable value is $ENVIRONMENT"
+  - echo "ENVIRONMENT variable value is $env:ENVIRONMENT"
   - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 ```
 
