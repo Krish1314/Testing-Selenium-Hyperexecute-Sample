@@ -101,18 +101,18 @@ jobLabel: [selenium-testng, win, autosplit, assignment]
   - `✔ [1] "Test_EnvVariable"` (Passed)
   - `x [1] "Test_IntentionalFailure"` + `{retry 1}` + `{retry 2}` (Verified 2x Retries)
 
-#### Dashboard Screenshots Gallery
-| 1. Setup Runtime (Java 11) | 2. Pre Steps & Env Echo |
+#### Dashboard Screenshots Gallery (Job #5)
+| 1. Setup Runtime (Java 11) | 2. Pre Steps ($env:ENVIRONMENT Echo) |
 |:---:|:---:|
 | ![Setup Runtime](screenshots/01_setup_runtime.png) | ![Pre Steps](screenshots/02_pre_steps.png) |
 
-| 3. Dynamic Test Discovery | 4. Scenarios & Retries |
+| 3. Dynamic Test Discovery | 4. Scenarios Overview & Retries |
 |:---:|:---:|
-| ![Test Discovery](screenshots/03_test_discovery.png) | ![Scenarios & Retries](screenshots/04_scenarios_and_retries.png) |
+| ![Test Discovery](screenshots/03_test_discovery.png) | ![Scenarios Overview](screenshots/04_scenarios_top.png) |
 
-| 5. Grid Execution Details | 6. Post Steps (Cache Upload) |
+| 5. Env Variable & Intentional Failure Retries | 6. Post Steps (Cache Upload) |
 |:---:|:---:|
-| ![Execution Details](screenshots/05_test_execution_details.png) | ![Post Steps](screenshots/06_post_steps.png) |
+| ![Scenarios & Retries](screenshots/04_scenarios_and_retries.png) | ![Post Steps](screenshots/06_post_steps.png) |
 
 ---
 
