@@ -101,6 +101,11 @@ jobLabel: [selenium-testng, win, autosplit, assignment]
   - `✔ [1] "Test_EnvVariable"` (Passed)
   - `x [1] "Test_IntentionalFailure"` + `{retry 1}` + `{retry 2}` (Verified 2x Retries)
 
+#### Dashboard Screenshots
+| Setup & Pre Steps | Test Execution & Retries |
+|---|---|
+| ![Pre Steps](screenshots/01_pre_steps.png) | ![Scenarios](screenshots/02_test_scenarios_retries.png) |
+
 ---
 
 ## Task 2: Environment Variables

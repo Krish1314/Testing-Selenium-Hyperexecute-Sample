@@ -6,8 +6,6 @@ autosplit: true
 concurrency: 1
 
 env:
-  LT_USERNAME: krishp1809
-  LT_ACCESS_KEY: LT_xwdBuYwXM9q9Ljj2duqPS9nkZLydFk3axdodZkNhGKTrL6G
   TOKEN: anvdegtod-asdaasda0asda-asda
   ENVIRONMENT: staging
 

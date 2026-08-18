@@ -33,8 +33,8 @@ import com.aventstack.extentreports.reporter.JsonFormatter;
 public class Test1 {
     RemoteWebDriver driver = null;
     public static String status = "passed";
-    public static String username = System.getenv("LT_USERNAME") != null ? System.getenv("LT_USERNAME") : "krishp1809";
-    public static String access_key = System.getenv("LT_ACCESS_KEY") != null ? System.getenv("LT_ACCESS_KEY") : "LT_xwdBuYwXM9q9Ljj2duqPS9nkZLydFk3axdodZkNhGKTrL6G";
+    public static String username = System.getenv("LT_USERNAME");
+    public static String access_key = System.getenv("LT_ACCESS_KEY");
 
     ExtentSparkReporter spark = new ExtentSparkReporter("target/surefire-reports/html/extentReport.html");
     JsonFormatter json = new JsonFormatter("target/surefire-reports/json/Extent_Report.json");
