@@ -1,0 +1,36 @@
+---
+version: "0.1"
+runson: win
+
+autosplit: true
+concurrency: 1
+
+env:
+  LT_USERNAME: krishp1809
+  LT_ACCESS_KEY: LT_xwdBuYwXM9q9Ljj2duqPS9nkZLydFk3axdodZkNhGKTrL6G
+  TOKEN: anvdegtod-asdaasda0asda-asda
+  ENVIRONMENT: staging
+
+runtime:
+  language: java
+  version: "11"
+
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+
+pre:
+  - echo "ENVIRONMENT variable value is $ENVIRONMENT"
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+
+testDiscovery:
+  type: raw
+  mode: dynamic
+  command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g' | sed 's/\"//g'
+
+testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 `-DselectedTests=$test
+
+retryOnFailure: true
+maxRetries: 2
+
+jobLabel: [selenium-testng, win, autosplit, assignment]

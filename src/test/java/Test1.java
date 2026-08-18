@@ -33,15 +33,14 @@ import com.aventstack.extentreports.reporter.JsonFormatter;
 public class Test1 {
     RemoteWebDriver driver = null;
     public static String status = "passed";
-    public static String username = System.getenv("LT_USERNAME");
-    public static String access_key = System.getenv("LT_ACCESS_KEY");
+    public static String username = System.getenv("LT_USERNAME") != null ? System.getenv("LT_USERNAME") : "krishp1809";
+    public static String access_key = System.getenv("LT_ACCESS_KEY") != null ? System.getenv("LT_ACCESS_KEY") : "LT_xwdBuYwXM9q9Ljj2duqPS9nkZLydFk3axdodZkNhGKTrL6G";
 
     ExtentSparkReporter spark = new ExtentSparkReporter("target/surefire-reports/html/extentReport.html");
     JsonFormatter json = new JsonFormatter("target/surefire-reports/json/Extent_Report.json");
     ExtentReports extent = new ExtentReports();
 
-    // String testURL = "https://todomvc.com/examples/react/#/";
-    String testURL = "https://ltqa-frontend.lambdatestinternal.com/sample-todo-app/";
+    String testURL = "https://lambdatest.github.io/sample-todo-app/";
     String testURLTitle = "Sample page - lambdatest.com";
 
     @BeforeMethod
