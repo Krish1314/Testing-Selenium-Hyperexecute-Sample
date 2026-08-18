@@ -50,7 +50,7 @@ jobLabel: [selenium-testng, win, v1, autosplit]
 | 1 | `version: 0.1` — Unquoted version | YAML parses `0.1` as a floating-point number (0.1). HyperExecute expects the version as a string `"0.1"`. This can cause type mismatch errors during config parsing. | Changed to `version: "0.1"` |
 | 2 | `conCurrency: 1` — Wrong casing | HyperExecute expects `concurrency` (all lowercase). `conCurrency` (camelCase) is not a recognized key and gets silently ignored, meaning no concurrency is configured. | Changed to `concurrency: 1` |
 | 3 | `env: TOKEN: anvdegtod...` — Invalid YAML structure | The `env` key must be a YAML mapping (block format), not an inline colon-separated value. `env: TOKEN: value` is invalid YAML — it makes `TOKEN: value` the string value of `env`, not a key-value pair. | Changed to proper block mapping with `env:` on its own line and `TOKEN:` indented below |
-| 4 | Backticks (`` ` ``) in `testRunnerCommand` | The backticks (`` `-Dplatname ``) are PowerShell escape characters, not valid in standard shell/YAML contexts. They cause command parsing errors when the command is executed on the HyperExecute VM. | Removed all backticks from the command |
+| 4 | `testRunnerCommand` — Syntax & PowerShell escaping | On Windows HyperExecute runners (PowerShell), `-D` properties must be escaped with PowerShell backticks (`` `-D ``) so PowerShell doesn't split arguments. Additionally, `dependency:resolve` was removed from the test runner command since dependencies are already resolved in `pre:`. | Updated command to: `mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 `-DselectedTests=$test` |
 | 5 | ` retryOnFailure: true` — Leading space | There is an extra leading space before `retryOnFailure`. In YAML, indentation is significant — this leading space makes it appear as a continuation of the previous block (`testRunnerCommand`) rather than a new top-level key. This causes a YAML parsing error. | Removed the leading space so `retryOnFailure` starts at column 0 |
 | 6 | Missing `runtime` block | The YAML doesn't specify the Java runtime version. Without this, HyperExecute may use a default runtime that might not match the project's requirements (Java 11). | Added `runtime:` block with `language: java` and `version: "11"` |
 
@@ -84,9 +84,9 @@ pre:
 testDiscovery:
   type: raw
   mode: dynamic
-  command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+  command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g' | sed 's/\"//g'
 
-testRunnerCommand: mvn test -Dplatname=win -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 `-DselectedTests=$test
 
 retryOnFailure: true
 maxRetries: 2
@@ -159,7 +159,7 @@ public class EnvVariableTest {
 ```
 
 ### Evidence
-> Log output screenshots showing the value printed in both pre-steps and during test execution will be added here.
+![Pre Steps ($env:ENVIRONMENT Echo)](screenshots/02_pre_steps.png)
 
 ---
 
@@ -196,7 +196,7 @@ maxRetries: 2
 This tells HyperExecute to automatically retry any failed test up to 2 additional times.
 
 ### Evidence
-> Dashboard screenshots showing the retry execution will be added here.
+![Scenarios and Retries](screenshots/04_scenarios_and_retries.png)
 
 ---
 
